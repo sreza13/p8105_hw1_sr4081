@@ -1,0 +1,78 @@
+---
+title: "Homework 1"
+author: "Samiha Reza"
+date: "2024-09-15"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+usethis::create_github_token()
+
+# Problem 1
+
+Here is the code chunk for ***data description***.
+
+```{r description, echo=TRUE}
+data("penguins", package = "palmerpenguins")
+
+summary(penguins)
+nrow(penguins)
+ncol(penguins)
+```
+
+The "penguins" data includes 8 variables: species, island, bill length (mm), bill depth (mm), flipper length (mm), body mass (g), sex, and year. There are three species: Adelie (152 penguins), Chinstrap (68 penguins), and Gentoo (124 penguins). There are three islands: Biscoe (168 pengiuins), Dream (124 penguins), and Torgersen (52 penguins).
+There are 8 columns, and 344 rows, so 344 data samples.The mean flipper length in mm is 200.9. 
+
+Here is the code chunk for the ***scatterplot***
+
+```{r scatterplot}
+library(tidyverse)
+
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
+
+ggsave("penguins_scatter.pdf")
+```
+# Problem 2
+
+Since we have already loaded tidyverse, we do not need to do it again.
+Here we have a code chunk to create the ***data frame***.
+
+```{r dataframe, echo = TRUE}
+question_2_df = tibble(
+  random_sample = rnorm(10),
+  logic_vector = random_sample > 0,
+  character_vector = rep("character", 10),
+  factor_vector = factor(rep(c("Level1", "Level2", "Level3"), length.out =10)),
+)
+
+print(question_2_df)
+```
+Here we pull variables from the dataframe and try to find the means of each.
+
+```{r variablexplore1}
+random_sample <- question_2_df$random_sample
+logic_vector <- question_2_df$logic_vector
+character_vector <- question_2_df$character_vector
+factor_vector <- question_2_df$factor_vector
+
+mean(random_sample)
+mean(logic_vector)
+mean(character_vector)
+mean(factor_vector)
+```
+Only random_sample and logic_vector has a mean value. Character and Factor vector do not because "argument is not numeric or logical."
+
+We now check if we can convert the variables to numeric ones.
+
+```{r variableexplore1}
+numeric_logical = as.numeric(logic_vector)
+# numeric_character = as.numeric(character_vector)
+# numeric_factor = as.numeric(factor)
+```
+Character and factor vector cannot be converted to numeric, which is why it isn't possible to find the mean. 
+
+
